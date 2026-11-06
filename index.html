@@ -1,0 +1,946 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Master Kids | Aashuu</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+ margin:0;
+ padding:15px;
+ font-family:Arial,sans-serif;
+ color:#28304a;
+ background:linear-gradient(-45deg,#e0f7ff,#ffe5f5,#e8e1ff,#d9fff1);
+ background-size:400% 400%;
+ animation:bgMove 12s ease infinite;
+ overflow-x:hidden;
+}
+
+@keyframes bgMove{
+ 0%{background-position:0% 50%}
+ 50%{background-position:100% 50%}
+ 100%{background-position:0% 50%}
+}
+
+/* WELCOME SCREEN */
+
+#welcome{
+ position:fixed;
+ inset:0;
+ z-index:200;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+ text-align:center;
+ overflow:hidden;
+ background:linear-gradient(135deg,#24134d,#635bff,#b45cff,#25134c);
+ background-size:300% 300%;
+ animation:welcomeBG 6s ease infinite;
+}
+
+@keyframes welcomeBG{
+ 0%{background-position:0% 50%}
+ 50%{background-position:100% 50%}
+ 100%{background-position:0% 50%}
+}
+
+.welcome-logo{
+ font-size:75px;
+ animation:logoBounce 2s infinite;
+}
+
+@keyframes logoBounce{
+ 0%,100%{transform:translateY(0) rotate(0)}
+ 50%{transform:translateY(-15px) rotate(8deg)}
+}
+
+.welcome-title{
+ color:white;
+ font-size:29px;
+ text-shadow:0 0 20px #c8baff;
+ animation:titleReveal 1.5s ease;
+}
+
+@keyframes titleReveal{
+ from{opacity:0;transform:scale(.5)}
+ to{opacity:1;transform:scale(1)}
+}
+
+.welcome-subtitle{
+ color:#f4eaff;
+ font-size:18px;
+}
+
+.developer{
+ margin:25px 0;
+ padding:20px 35px;
+ border:1px solid #ffffff70;
+ border-radius:20px;
+ background:#ffffff18;
+ animation:developerGlow 2s infinite;
+}
+
+.developer span{
+ color:#e6d9ff;
+ font-size:12px;
+ letter-spacing:4px;
+}
+
+.developer h2{
+ color:white;
+ font-size:32px;
+ margin:12px 0 0;
+ text-shadow:0 0 15px white;
+ animation:nameFloat 2s infinite;
+}
+
+@keyframes nameFloat{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-5px)}
+}
+
+@keyframes developerGlow{
+ 0%,100%{box-shadow:0 0 10px #ffffff15}
+ 50%{box-shadow:0 0 30px #d7baff70}
+}
+
+.welcome-stars{
+ font-size:30px;
+ animation:starsFloat 3s infinite;
+}
+
+@keyframes starsFloat{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-12px)}
+}
+
+#welcome button{
+ max-width:280px;
+ padding:17px;
+ border-radius:50px;
+ background:linear-gradient(90deg,#ff70c8,#8d6bff);
+ color:white;
+ font-size:18px;
+ box-shadow:0 0 25px #ffffff50;
+ animation:buttonPulse 1.5s infinite;
+}
+
+@keyframes buttonPulse{
+ 0%,100%{transform:scale(1)}
+ 50%{transform:scale(1.05)}
+}
+
+.welcome-footer{
+ color:#e8dfff;
+ font-size:12px;
+ margin-top:25px;
+}
+
+#welcome.exit{
+ animation:welcomeExit .8s forwards;
+}
+
+@keyframes welcomeExit{
+ to{
+  opacity:0;
+  transform:scale(1.5);
+  visibility:hidden;
+ }
+}
+
+/* MAIN APP */
+
+header{
+ text-align:center;
+ padding:20px 5px;
+ animation:fadeIn 1s ease;
+}
+
+header h1{
+ font-size:30px;
+ color:#635bff;
+ text-shadow:0 0 15px #b5aaff;
+ animation:titleFloat 3s ease-in-out infinite;
+}
+
+@keyframes titleFloat{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-6px)}
+}
+
+@keyframes fadeIn{
+ from{opacity:0;transform:translateY(20px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+.card{
+ max-width:500px;
+ margin:15px auto;
+ padding:20px;
+ border-radius:22px;
+ background:rgba(255,255,255,.94);
+ box-shadow:0 10px 30px #9ba9d333;
+ animation:cardIn .6s ease;
+}
+
+@keyframes cardIn{
+ from{opacity:0;transform:translateY(15px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+.stats{
+ display:flex;
+ gap:9px;
+}
+
+.stat{
+ flex:1;
+ text-align:center;
+ background:#f0f2ff;
+ border-radius:15px;
+ padding:12px 4px;
+}
+
+.stat h2{
+ margin:5px;
+ color:#635bff;
+}
+
+.stat p{
+ margin:3px;
+ font-size:12px;
+}
+
+h3{margin-top:0}
+
+button,input,select{
+ width:100%;
+ padding:14px;
+ border-radius:13px;
+ border:0;
+ margin:7px 0;
+ font-size:16px;
+}
+
+button{
+ background:linear-gradient(135deg,#635bff,#9b69ff);
+ color:white;
+ font-weight:bold;
+ cursor:pointer;
+ transition:transform .2s;
+ box-shadow:0 5px 12px #635bff30;
+}
+
+button:active{transform:scale(.94)}
+
+input,select{
+ background:#f1f4ff;
+ color:#24304a;
+}
+
+.operations{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:8px;
+}
+
+.operations button{
+ background:#edf0ff;
+ color:#4b50a0;
+}
+
+.operations button.active{
+ background:linear-gradient(135deg,#635bff,#a05bff);
+ color:white;
+}
+
+.question{
+ text-align:center;
+ background:linear-gradient(135deg,#f4f1ff,#e8f7ff);
+ border-radius:20px;
+ padding:28px 10px;
+ margin:15px 0;
+ animation:questionFloat 3s ease-in-out infinite;
+}
+
+@keyframes questionFloat{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-4px)}
+}
+
+#question{
+ font-size:36px;
+ font-weight:bold;
+ color:#635bff;
+ animation:questionPop .5s ease;
+}
+
+@keyframes questionPop{
+ 0%{transform:scale(.6);opacity:0}
+ 70%{transform:scale(1.1)}
+ 100%{transform:scale(1);opacity:1}
+}
+
+#answer{
+ text-align:center;
+ font-size:24px;
+}
+
+#feedback{
+ text-align:center;
+ font-weight:bold;
+ min-height:35px;
+ padding:8px;
+}
+
+.hidden{display:none}
+
+#achievement{
+ text-align:center;
+ font-size:20px;
+}
+
+#mascot{
+ font-size:65px;
+ display:inline-block;
+ animation:mascotDance 1s infinite;
+}
+
+@keyframes mascotDance{
+ 0%,100%{transform:rotate(-8deg) scale(1)}
+ 50%{transform:rotate(8deg) scale(1.15)}
+}
+
+footer{
+ text-align:center;
+ padding:20px;
+ color:#78839a;
+ font-size:12px;
+}
+
+/* CONFETTI */
+
+#celebration{
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ overflow:hidden;
+ z-index:99;
+}
+
+.confetti{
+ position:absolute;
+ top:-20px;
+ width:10px;
+ height:14px;
+ animation:fall 2.5s linear forwards;
+}
+
+@keyframes fall{
+ 0%{transform:translateY(-10px) rotate(0);opacity:1}
+ 100%{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
+
+/* CHAMPION */
+
+#bigWin{
+ position:fixed;
+ inset:0;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ flex-direction:column;
+ background:#24184dcc;
+ color:white;
+ z-index:100;
+ text-align:center;
+}
+
+#bigWin.show{
+ display:flex;
+ animation:fadeIn .5s;
+}
+
+#bigWin h1{
+ font-size:38px;
+ animation:titleFloat 1s infinite;
+}
+
+#bigWin button{
+ width:200px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- WELCOME -->
+
+<div id="welcome">
+
+ <div class="welcome-stars">✨ ⭐ ✨</div>
+
+ <div class="welcome-logo">🧮</div>
+
+ <h1 class="welcome-title">MATH MASTER KIDS</h1>
+
+ <p class="welcome-subtitle">Let's Learn & Play!</p>
+
+ <div class="developer">
+  <span>DEVELOPED BY</span>
+  <h2>AASHUU 💜</h2>
+ </div>
+
+ <button onclick="startGame()">🚀 START GAME</button>
+
+ <p class="welcome-footer">Made with ❤️ by Aashuu</p>
+
+</div>
+
+<div id="celebration"></div>
+
+<!-- CHAMPION -->
+
+<div id="bigWin">
+ <div id="mascot">🏆</div>
+ <h1>Math Champion!</h1>
+ <p>100 Stars! Amazing work!</p>
+ <button onclick="closeWin()">Continue Playing</button>
+</div>
+
+<!-- APP HEADER -->
+
+<header>
+ <h1>🌈 Math Master Kids</h1>
+ <p>Learn Math • Play • Get Stars ⭐</p>
+ <div id="mainMascot">🧸</div>
+</header>
+
+<!-- SCORE -->
+
+<div class="card">
+ <div class="stats">
+
+  <div class="stat">
+   <h2 id="score">0</h2>
+   <p>⭐ Score</p>
+  </div>
+
+  <div class="stat">
+   <h2 id="correct">0</h2>
+   <p>✅ Correct</p>
+  </div>
+
+  <div class="stat">
+   <h2 id="round">0</h2>
+   <p>📝 Questions</p>
+  </div>
+
+ </div>
+</div>
+
+<!-- MODES -->
+
+<div class="card">
+
+ <h3>🎮 Choose Math Game</h3>
+
+ <div class="operations">
+
+  <button class="active" onclick="choose('add',this)">➕ Addition</button>
+
+  <button onclick="choose('sub',this)">➖ Subtraction</button>
+
+  <button onclick="choose('mul',this)">✖️ Multiplication</button>
+
+  <button onclick="choose('div',this)">➗ Division</button>
+
+  <button onclick="choose('table',this)">🔢 Tables</button>
+
+  <button onclick="choose('mix',this)">🌟 Mixed Quiz</button>
+
+ </div>
+
+</div>
+
+<!-- LEVEL -->
+
+<div class="card">
+
+ <h3>📚 Choose Level</h3>
+
+ <select id="level" onchange="newQuestion()">
+  <option value="1">Easy - Small Numbers</option>
+  <option value="2">Medium - Numbers up to 50</option>
+  <option value="3">Hard - Numbers up to 100</option>
+ </select>
+
+ <div id="tableBox" class="hidden">
+
+  <p>Choose multiplication table</p>
+
+  <select id="tableNumber" onchange="newQuestion()">
+   <option value="2">Table of 2</option>
+   <option value="3">Table of 3</option>
+   <option value="4">Table of 4</option>
+   <option value="5">Table of 5</option>
+   <option value="6">Table of 6</option>
+   <option value="7">Table of 7</option>
+   <option value="8">Table of 8</option>
+   <option value="9">Table of 9</option>
+   <option value="10">Table of 10</option>
+   <option value="11">Table of 11</option>
+   <option value="12">Table of 12</option>
+  </select>
+
+ </div>
+
+</div>
+
+<!-- GAME -->
+
+<div class="card">
+
+ <h3>🧠 Solve the Question</h3>
+
+ <div class="question">
+  <div id="question">5 + 3 = ?</div>
+ </div>
+
+ <input
+  id="answer"
+  type="number"
+  placeholder="Enter your answer"
+  inputmode="numeric"
+ >
+
+ <button onclick="checkAnswer()">✅ Check Answer</button>
+
+ <div id="feedback"></div>
+
+ <button onclick="newQuestion()">➡️ Next Question</button>
+
+</div>
+
+<!-- ACHIEVEMENT -->
+
+<div class="card">
+
+ <h3>🏆 Your Achievement</h3>
+
+ <p id="achievement">🌱 Start your Math journey!</p>
+
+ <button onclick="resetGame()">🔄 Restart Game</button>
+
+</div>
+
+<footer>
+ Math Master Kids<br>
+ Developed by Aashuu 💜
+</footer>
+
+<script>
+
+let operation="add";
+
+let a=5;
+let b=3;
+let correctAnswer=8;
+
+let score=0;
+let correct=0;
+let round=0;
+
+let answered=false;
+let championShown=false;
+
+function random(max){
+ return Math.floor(Math.random()*max)+1;
+}
+
+// START SCREEN
+
+function startGame(){
+
+ const welcome=document.getElementById("welcome");
+
+ welcome.classList.add("exit");
+
+ setTimeout(function(){
+  welcome.style.display="none";
+ },800);
+
+}
+
+// CHOOSE GAME
+
+function choose(type,button){
+
+ operation=type;
+
+ document.querySelectorAll(".operations button")
+  .forEach(btn=>btn.classList.remove("active"));
+
+ button.classList.add("active");
+
+ document.getElementById("tableBox")
+  .classList.toggle("hidden",type!=="table");
+
+ newQuestion();
+
+}
+
+// NEW QUESTION
+
+function newQuestion(){
+
+ let level=Number(document.getElementById("level").value);
+
+ let max=level===1?10:level===2?50:100;
+
+ let type=operation;
+
+ if(type==="mix"){
+  type=["add","sub","mul","div"][random(4)-1];
+ }
+
+ if(type==="table"){
+
+  a=Number(document.getElementById("tableNumber").value);
+  b=random(12);
+
+  correctAnswer=a*b;
+
+  showQuestion(a+" × "+b+" = ?");
+
+ }
+
+ else if(type==="add"){
+
+  a=random(max);
+  b=random(max);
+
+  correctAnswer=a+b;
+
+  showQuestion(a+" + "+b+" = ?");
+
+ }
+
+ else if(type==="sub"){
+
+  a=random(max);
+  b=random(max);
+
+  if(b>a){
+   [a,b]=[b,a];
+  }
+
+  correctAnswer=a-b;
+
+  showQuestion(a+" − "+b+" = ?");
+
+ }
+
+ else if(type==="mul"){
+
+  a=random(level===1?10:level===2?20:50);
+
+  b=random(level===1?10:level===2?12:20);
+
+  correctAnswer=a*b;
+
+  showQuestion(a+" × "+b+" = ?");
+
+ }
+
+ else if(type==="div"){
+
+  b=random(level===1?10:level===2?12:20);
+
+  correctAnswer=random(level===1?10:level===2?20:50);
+
+  a=b*correctAnswer;
+
+  showQuestion(a+" ÷ "+b+" = ?");
+
+ }
+
+ answered=false;
+
+ document.getElementById("answer").value="";
+ document.getElementById("feedback").textContent="";
+
+}
+
+// QUESTION ANIMATION
+
+function showQuestion(text){
+
+ let q=document.getElementById("question");
+
+ q.style.animation="none";
+ q.offsetHeight;
+
+ q.textContent=text;
+
+ q.style.animation="questionPop .5s ease";
+
+}
+
+// ORIGINAL VICTORY MELODY
+
+function playWinSong(){
+
+ const AudioContext=window.AudioContext||
+  window.webkitAudioContext;
+
+ if(!AudioContext)return;
+
+ const audio=new AudioContext();
+
+ if(audio.state==="suspended"){
+  audio.resume();
+ }
+
+ const notes=[
+  [523,0],
+  [659,0.2],
+  [784,0.4],
+  [1046,0.6],
+  [784,0.85],
+  [1046,1.1]
+ ];
+
+ notes.forEach(([frequency,delay])=>{
+
+  const oscillator=audio.createOscillator();
+  const volume=audio.createGain();
+
+  oscillator.type="sine";
+  oscillator.frequency.value=frequency;
+
+  volume.gain.setValueAtTime(
+   0.001,
+   audio.currentTime+delay
+  );
+
+  volume.gain.linearRampToValueAtTime(
+   0.12,
+   audio.currentTime+delay+0.03
+  );
+
+  volume.gain.exponentialRampToValueAtTime(
+   0.001,
+   audio.currentTime+delay+0.18
+  );
+
+  oscillator.connect(volume);
+  volume.connect(audio.destination);
+
+  oscillator.start(audio.currentTime+delay);
+
+  oscillator.stop(audio.currentTime+delay+0.2);
+
+ });
+
+}
+
+// CONFETTI
+
+function celebrate(){
+
+ const area=document.getElementById("celebration");
+
+ const colors=[
+  "#ff4d8d",
+  "#ffd43b",
+  "#38d9ff",
+  "#9b5cff",
+  "#55e88a"
+ ];
+
+ for(let i=0;i<45;i++){
+
+  const piece=document.createElement("div");
+
+  piece.className="confetti";
+
+  piece.style.left=Math.random()*100+"%";
+
+  piece.style.background=
+   colors[Math.floor(Math.random()*colors.length)];
+
+  piece.style.animationDuration=
+   (1.5+Math.random()*2)+"s";
+
+  piece.style.animationDelay=
+   Math.random()*0.5+"s";
+
+  area.appendChild(piece);
+
+  setTimeout(()=>{
+   piece.remove();
+  },4000);
+
+ }
+
+}
+
+// CHAMPION
+
+function showChampion(){
+
+ if(score>=100&&!championShown){
+
+  championShown=true;
+
+  document.getElementById("bigWin")
+   .classList.add("show");
+
+  celebrate();
+
+ }
+
+}
+
+function closeWin(){
+
+ document.getElementById("bigWin")
+  .classList.remove("show");
+
+}
+
+// CHECK ANSWER
+
+function checkAnswer(){
+
+ if(answered){
+
+  document.getElementById("feedback").textContent=
+   "Press Next Question ➡️";
+
+  return;
+
+ }
+
+ let input=document.getElementById("answer");
+
+ if(input.value.trim()===""){
+
+  document.getElementById("feedback").textContent=
+   "✏️ Enter your answer first!";
+
+  return;
+
+ }
+
+ let value=Number(input.value);
+
+ round++;
+
+ if(value===correctAnswer){
+
+  score+=10;
+  correct++;
+
+  document.getElementById("feedback").textContent=
+   "🎉 Correct Answer! +10 Stars ⭐";
+
+  playWinSong();
+
+  celebrate();
+
+  document.getElementById("mainMascot").textContent="🥳";
+
+ }else{
+
+  document.getElementById("feedback").textContent=
+   "😊 Try again! Correct answer: "+correctAnswer;
+
+  document.getElementById("mainMascot").textContent="🤔";
+
+ }
+
+ answered=true;
+
+ updateStats();
+
+ showChampion();
+
+}
+
+// UPDATE SCORE
+
+function updateStats(){
+
+ document.getElementById("score").textContent=score;
+
+ document.getElementById("correct").textContent=correct;
+
+ document.getElementById("round").textContent=round;
+
+ let achievement="🌱 Start your Math journey!";
+
+ if(score>=100){
+
+  achievement="🏆 Math Champion!";
+
+ }else if(score>=50){
+
+  achievement="🌟 Super Math Student!";
+
+ }else if(score>=20){
+
+  achievement="🚀 Great Learning!";
+
+ }
+
+ document.getElementById("achievement").textContent=
+  achievement;
+
+}
+
+// RESTART
+
+function resetGame(){
+
+ score=0;
+ correct=0;
+ round=0;
+
+ championShown=false;
+
+ document.getElementById("mainMascot").textContent="🧸";
+
+ closeWin();
+
+ updateStats();
+
+ newQuestion();
+
+}
+
+// ENTER KEY
+
+document.getElementById("answer")
+ .addEventListener("keydown",function(event){
+
+  if(event.key==="Enter"){
+   checkAnswer();
+  }
+
+ });
+
+newQuestion();
+
+</script>
+
+</body>
+</html>
